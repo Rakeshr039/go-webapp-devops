@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-web-app
+  labels:
+    app: go-web-app
+spec:
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  selector:
+    matchLabels:
+      app: go-web-app
+  template:
+    metadata:
+      labels:
+        app: go-web-app
+    spec:  
+      containers: 
+        - name: {{ .Chart.Name }}      
+          image: "{{ .Values.image.repository | default "rakesh0019/go-web-app" }}:{{ .Values.image.tag | default "v1" }}"
+          ports:
+            - containerPort: 8080

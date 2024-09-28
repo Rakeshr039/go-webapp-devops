@@ -1,3 +1,4 @@
+# This is a sample deployment manifest file for a simple web application.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,7 +6,7 @@ metadata:
   labels:
     app: go-web-app
 spec:
-  replicas: 1 # tells deployment to run 2 pods matching the template
+  replicas: 1
   selector:
     matchLabels:
       app: go-web-app
@@ -16,6 +17,6 @@ spec:
     spec:
       containers:
       - name: go-web-app
-        image: rakesh0019/go-web-app:v1
+        image: rakesh0019/go-web-app:{{ .Values.image.tag }}
         ports:
         - containerPort: 8080
